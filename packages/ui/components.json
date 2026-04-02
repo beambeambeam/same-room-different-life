@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "base-lyra",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/styles/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "components": "@same-room-different-life/ui/components",
+    "utils": "@same-room-different-life/ui/lib/utils",
+    "hooks": "@same-room-different-life/ui/hooks",
+    "lib": "@same-room-different-life/ui/lib",
+    "ui": "@same-room-different-life/ui/components"
+  },
+  "menuColor": "default",
+  "menuAccent": "subtle",
+  "registries": {}
+}

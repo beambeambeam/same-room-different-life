@@ -1,0 +1,6 @@
+{
+  "extends": "@same-room-different-life/config/tsconfig.base.json",
+  "compilerOptions": {
+    "strictNullChecks": true
+  }
+}

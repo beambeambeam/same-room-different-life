@@ -1,0 +1,23 @@
+{
+  "name": "@same-room-different-life/backend",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "scripts": {
+    "dev": "convex dev",
+    "dev:setup": "convex dev --configure --until-success"
+  },
+  "dependencies": {
+    "@convex-dev/better-auth": "catalog:",
+    "better-auth": "catalog:",
+    "convex": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@same-room-different-life/config": "workspace:*",
+    "@types/node": "^24.3.0",
+    "typescript": "^5"
+  }
+}
