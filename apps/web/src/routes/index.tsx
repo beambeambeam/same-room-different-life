@@ -1,65 +1,12 @@
-import { api } from "@same-room-different-life/backend/convex/_generated/api";
 import { createFileRoute } from "@tanstack/react-router";
-import { useQuery } from "convex/react";
 
-const TITLE_TEXT = `
- ██████╗ ███████╗████████╗████████╗███████╗██████╗
- ██╔══██╗██╔════╝╚══██╔══╝╚══██╔══╝██╔════╝██╔══██╗
- ██████╔╝█████╗     ██║      ██║   █████╗  ██████╔╝
- ██╔══██╗██╔══╝     ██║      ██║   ██╔══╝  ██╔══██╗
- ██████╔╝███████╗   ██║      ██║   ███████╗██║  ██║
- ╚═════╝ ╚══════╝   ╚═╝      ╚═╝   ╚══════╝╚═╝  ╚═╝
-
- ████████╗    ███████╗████████╗ █████╗  ██████╗██╗  ██╗
- ╚══██╔══╝    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝
-    ██║       ███████╗   ██║   ███████║██║     █████╔╝
-    ██║       ╚════██║   ██║   ██╔══██║██║     ██╔═██╗
-    ██║       ███████║   ██║   ██║  ██║╚██████╗██║  ██╗
-    ╚═╝       ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
- `;
-
-const getStatusColor = (healthCheck: string | undefined) => {
-  if (healthCheck === "OK") {
-    return "bg-green-500";
-  }
-  if (healthCheck === undefined) {
-    return "bg-orange-400";
-  }
-  return "bg-red-500";
-};
-
-const getStatusText = (healthCheck: string | undefined) => {
-  if (healthCheck === undefined) {
-    return "Checking...";
-  }
-  if (healthCheck === "OK") {
-    return "Connected";
-  }
-  return "Error";
-};
-
-const HomeComponent = () => {
-  const healthCheck = useQuery(api.healthCheck.get);
-
-  return (
-    <div className="container mx-auto max-w-3xl px-4 py-2">
-      <pre className="overflow-x-auto font-mono text-sm">{TITLE_TEXT}</pre>
-      <div className="grid gap-6">
-        <section className="rounded-lg border p-4">
-          <h2 className="mb-2 font-medium">API Status</h2>
-          <div className="flex items-center gap-2">
-            <div
-              className={`h-2 w-2 rounded-full ${getStatusColor(healthCheck)}`}
-            />
-            <span className="text-sm text-muted-foreground">
-              {getStatusText(healthCheck)}
-            </span>
-          </div>
-        </section>
-      </div>
-    </div>
-  );
-};
+const HomeComponent = () => (
+  <main className="flex min-h-svh items-center justify-center">
+    <h1 className="text-center text-4xl font-semibold tracking-tight sm:text-5xl">
+      Same room, Different life.
+    </h1>
+  </main>
+);
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,

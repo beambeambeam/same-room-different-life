@@ -11,23 +11,11 @@
     "check-types": "vite build && tsc --noEmit"
   },
   "dependencies": {
-    "@convex-dev/better-auth": "catalog:",
-    "@hookform/resolvers": "^5.1.1",
-    "@same-room-different-life/backend": "workspace:*",
-    "@same-room-different-life/env": "workspace:*",
     "@same-room-different-life/ui": "workspace:*",
     "@tailwindcss/vite": "^4.1.18",
-    "@tanstack/react-form": "^1.28.0",
     "@tanstack/react-router": "^1.141.1",
-    "better-auth": "catalog:",
-    "convex": "catalog:",
-    "dotenv": "catalog:",
-    "lucide-react": "catalog:",
-    "next-themes": "catalog:",
     "react": "catalog:",
-    "react-dom": "catalog:",
-    "sonner": "catalog:",
-    "zod": "catalog:"
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@same-room-different-life/config": "workspace:*",
