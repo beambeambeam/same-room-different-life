@@ -14,13 +14,15 @@ import { useQuery } from "convex/react";
 
 import { authClient } from "@/lib/auth-client";
 
-export default function UserMenu() {
+const UserMenu = () => {
   const navigate = useNavigate();
   const user = useQuery(api.auth.getCurrentUser);
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline" />}>{user?.name}</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant="outline" />}>
+        {user?.name}
+      </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-card">
         <DropdownMenuGroup>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -46,4 +48,6 @@ export default function UserMenu() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
+
+export default UserMenu;

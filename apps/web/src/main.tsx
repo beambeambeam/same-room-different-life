@@ -13,10 +13,6 @@ const convex = new ConvexReactClient(env.VITE_CONVEX_URL, {
 });
 
 const router = createRouter({
-  routeTree,
-  defaultPreload: "intent",
-  defaultPendingComponent: () => <Loader />,
-  context: {},
   Wrap: function WrapComponent({ children }: { children: React.ReactNode }) {
     return (
       <ConvexBetterAuthProvider client={convex} authClient={authClient}>
@@ -24,6 +20,10 @@ const router = createRouter({
       </ConvexBetterAuthProvider>
     );
   },
+  context: {},
+  defaultPendingComponent: () => <Loader />,
+  defaultPreload: "intent",
+  routeTree,
 });
 
 declare module "@tanstack/react-router" {
@@ -32,7 +32,7 @@ declare module "@tanstack/react-router" {
   }
 }
 
-const rootElement = document.getElementById("app");
+const rootElement = document.querySelector("#app");
 
 if (!rootElement) {
   throw new Error("Root element not found");

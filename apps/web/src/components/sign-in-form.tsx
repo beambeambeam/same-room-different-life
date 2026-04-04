@@ -4,11 +4,19 @@ import { Label } from "@same-room-different-life/ui/components/label";
 import { useForm } from "@tanstack/react-form";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
-import z from "zod";
+import { z } from "zod";
 
 import { authClient } from "@/lib/auth-client";
 
-export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () => void }) {
+const subscribeSelector = (state: {
+  canSubmit: boolean;
+  isSubmitting: boolean;
+}) => ({
+  canSubmit: state.canSubmit,
+  isSubmitting: state.isSubmitting,
+});
+
+const SignInForm = ({ onSwitchToSignUp }: { onSwitchToSignUp: () => void }) => {
   const navigate = useNavigate({
     from: "/",
   });
@@ -25,16 +33,16 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
           password: value.password,
         },
         {
+          onError: (error) => {
+            toast.error(error.error.message || error.error.statusText);
+          },
           onSuccess: () => {
             navigate({
               to: "/dashboard",
             });
             toast.success("Sign in successful");
           },
-          onError: (error) => {
-            toast.error(error.error.message || error.error.statusText);
-          },
-        },
+        }
       );
     },
     validators: {
@@ -70,8 +78,8 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                 />
-                {field.state.meta.errors.map((error, index) => (
-                  <p key={`${field.name}-error-${index}`} className="text-red-500">
+                {field.state.meta.errors.map((error) => (
+                  <p key={error?.message} className="text-red-500">
                     {error?.message}
                   </p>
                 ))}
@@ -93,8 +101,8 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                 />
-                {field.state.meta.errors.map((error, index) => (
-                  <p key={`${field.name}-error-${index}`} className="text-red-500">
+                {field.state.meta.errors.map((error) => (
+                  <p key={error?.message} className="text-red-500">
                     {error?.message}
                   </p>
                 ))}
@@ -103,11 +111,13 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
           </form.Field>
         </div>
 
-        <form.Subscribe
-          selector={(state) => ({ canSubmit: state.canSubmit, isSubmitting: state.isSubmitting })}
-        >
+        <form.Subscribe selector={subscribeSelector}>
           {({ canSubmit, isSubmitting }) => (
-            <Button type="submit" className="w-full" disabled={!canSubmit || isSubmitting}>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={!canSubmit || isSubmitting}
+            >
               {isSubmitting ? "Submitting..." : "Sign In"}
             </Button>
           )}
@@ -125,4 +135,6 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
       </div>
     </div>
   );
-}
+};
+
+export default SignInForm;

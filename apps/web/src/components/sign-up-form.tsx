@@ -4,11 +4,19 @@ import { Label } from "@same-room-different-life/ui/components/label";
 import { useForm } from "@tanstack/react-form";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
-import z from "zod";
+import { z } from "zod";
 
 import { authClient } from "@/lib/auth-client";
 
-export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () => void }) {
+const subscribeSelector = (state: {
+  canSubmit: boolean;
+  isSubmitting: boolean;
+}) => ({
+  canSubmit: state.canSubmit,
+  isSubmitting: state.isSubmitting,
+});
+
+const SignUpForm = ({ onSwitchToSignIn }: { onSwitchToSignIn: () => void }) => {
   const navigate = useNavigate({
     from: "/",
   });
@@ -16,33 +24,33 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
   const form = useForm({
     defaultValues: {
       email: "",
-      password: "",
       name: "",
+      password: "",
     },
     onSubmit: async ({ value }) => {
       await authClient.signUp.email(
         {
           email: value.email,
-          password: value.password,
           name: value.name,
+          password: value.password,
         },
         {
+          onError: (error) => {
+            toast.error(error.error.message || error.error.statusText);
+          },
           onSuccess: () => {
             navigate({
               to: "/dashboard",
             });
             toast.success("Sign up successful");
           },
-          onError: (error) => {
-            toast.error(error.error.message || error.error.statusText);
-          },
-        },
+        }
       );
     },
     validators: {
       onSubmit: z.object({
-        name: z.string().min(2, "Name must be at least 2 characters"),
         email: z.email("Invalid email address"),
+        name: z.string().min(2, "Name must be at least 2 characters"),
         password: z.string().min(8, "Password must be at least 8 characters"),
       }),
     },
@@ -72,8 +80,8 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                 />
-                {field.state.meta.errors.map((error, index) => (
-                  <p key={`${field.name}-error-${index}`} className="text-red-500">
+                {field.state.meta.errors.map((error) => (
+                  <p key={error?.message} className="text-red-500">
                     {error?.message}
                   </p>
                 ))}
@@ -95,8 +103,8 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                 />
-                {field.state.meta.errors.map((error, index) => (
-                  <p key={`${field.name}-error-${index}`} className="text-red-500">
+                {field.state.meta.errors.map((error) => (
+                  <p key={error?.message} className="text-red-500">
                     {error?.message}
                   </p>
                 ))}
@@ -118,8 +126,8 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                 />
-                {field.state.meta.errors.map((error, index) => (
-                  <p key={`${field.name}-error-${index}`} className="text-red-500">
+                {field.state.meta.errors.map((error) => (
+                  <p key={error?.message} className="text-red-500">
                     {error?.message}
                   </p>
                 ))}
@@ -128,11 +136,13 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
           </form.Field>
         </div>
 
-        <form.Subscribe
-          selector={(state) => ({ canSubmit: state.canSubmit, isSubmitting: state.isSubmitting })}
-        >
+        <form.Subscribe selector={subscribeSelector}>
           {({ canSubmit, isSubmitting }) => (
-            <Button type="submit" className="w-full" disabled={!canSubmit || isSubmitting}>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={!canSubmit || isSubmitting}
+            >
               {isSubmitting ? "Submitting..." : "Sign Up"}
             </Button>
           )}
@@ -150,4 +160,6 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
       </div>
     </div>
   );
-}
+};
+
+export default SignUpForm;
