@@ -31,7 +31,8 @@
     "dev:server": "turbo -F @same-room-different-life/backend dev",
     "dev:setup": "turbo -F @same-room-different-life/backend dev:setup",
     "check": "ultracite check",
-    "fix": "ultracite fix"
+    "fix": "ultracite fix",
+    "prepare": "lefthook install"
   },
   "dependencies": {
     "@same-room-different-life/env": "workspace:*",
@@ -39,6 +40,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
     "@same-room-different-life/config": "workspace:*",
     "lefthook": "latest",
     "oxfmt": "latest",
