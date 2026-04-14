@@ -1,11 +1,10 @@
 import { Button } from "@same-room-different-life/ui/components/button";
+import { Logo } from "@same-room-different-life/ui/components/logo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 const HomeComponent = () => (
   <main className="flex min-h-svh flex-col items-center justify-center gap-6">
-    <h1 className="text-center text-4xl font-semibold tracking-tight sm:text-5xl">
-      Same room, Different life.
-    </h1>
+    <Logo variant="long" theme="light" className="w-96 max-w-full" />
     <Button asChild>
       <Link to="/join">Join</Link>
     </Button>
