@@ -98,6 +98,7 @@
       },
       "devDependencies": {
         "@same-room-different-life/config": "workspace:*",
+        "@types/node": "^24.3.0",
         "@types/react": "catalog:",
         "@types/react-dom": "catalog:",
         "tailwindcss": "catalog:",
