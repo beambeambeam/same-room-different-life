@@ -14,6 +14,22 @@ export const hasAnyAdmin = query({
   returns: v.boolean(),
 });
 
+export const findUserIdByEmail = query({
+  args: {
+    email: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const normalizedEmail = args.email.toLowerCase();
+    const user = await ctx.db
+      .query("user")
+      .filter((q) => q.eq(q.field("email"), normalizedEmail))
+      .unique();
+
+    return user?._id ?? null;
+  },
+  returns: v.union(v.id("user"), v.null()),
+});
+
 export const bootstrapFirstAdmin = mutation({
   args: {
     userId: v.id("user"),
