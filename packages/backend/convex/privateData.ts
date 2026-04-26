@@ -1,5 +1,5 @@
 import { query } from "./_generated/server";
-import { privateProcedure } from "./auth-guards";
+import { privateProcedure } from "./authguards";
 
 export const get = query({
   args: {},
