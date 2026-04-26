@@ -27,6 +27,7 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "check-types": "turbo check-types",
+    "seed": "bun run --cwd packages/backend seed",
     "dev:web": "turbo -F web dev",
     "dev:server": "turbo -F @same-room-different-life/backend dev",
     "dev:setup": "turbo -F @same-room-different-life/backend dev:setup",

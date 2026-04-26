@@ -6,6 +6,8 @@
   ],
   "ignorePatterns": [
     "packages/backend/convex/_generated/**",
+    "packages/backend/convex/betterAuth/_generated/**",
+    "packages/backend/convex/betterAuth/schema.ts",
     "apps/web/src/routeTree.gen.ts"
   ],
   "rules": {

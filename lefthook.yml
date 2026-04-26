@@ -5,10 +5,10 @@ pre-commit:
   parallel: true
   jobs:
     - name: oxlint
-      run: bun oxlint --fix {staged_files}
+      run: files=$(printf '%s\n' {staged_files} | rg -v '^(packages/backend/convex/_generated|packages/backend/convex/betterAuth/_generated)/'); if [ -n "$files" ]; then bun oxlint --fix $files; fi
       stage_fixed: true
     - name: oxfmt
-      run: bun oxfmt --write {staged_files}
+      run: files=$(printf '%s\n' {staged_files} | rg -v '^(packages/backend/convex/_generated|packages/backend/convex/betterAuth/_generated)/'); if [ -n "$files" ]; then bun oxfmt --write $files; fi
       stage_fixed: true
 
 commit-msg:

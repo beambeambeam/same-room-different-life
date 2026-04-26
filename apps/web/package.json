@@ -11,9 +11,11 @@
     "check-types": "vite build && tsc --noEmit"
   },
   "dependencies": {
+    "@same-room-different-life/env": "workspace:*",
     "@same-room-different-life/ui": "workspace:*",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-router": "^1.141.1",
+    "better-auth": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
