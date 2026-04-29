@@ -4,6 +4,7 @@
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
   "ignorePatterns": [
     "packages/backend/convex/_generated/**",
+    "packages/backend/convex/betterAuth/_generated/**",
     "apps/web/src/routeTree.gen.ts",
   ],
   "arrowParens": "always",

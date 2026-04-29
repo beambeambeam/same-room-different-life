@@ -4,6 +4,7 @@ import {
   createRootRouteWithContext,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { NuqsAdapter } from "nuqs/adapters/tanstack-router";
 
 import "../index.css";
 
@@ -12,7 +13,9 @@ export type RouterAppContext = object;
 const RootComponent = () => (
   <>
     <HeadContent />
-    <Outlet />
+    <NuqsAdapter>
+      <Outlet />
+    </NuqsAdapter>
     <TanStackRouterDevtools position="bottom-left" />
   </>
 );

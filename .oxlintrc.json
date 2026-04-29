@@ -16,6 +16,30 @@
   },
   "overrides": [
     {
+      "files": ["packages/ui/src/**"],
+      "rules": {
+        "func-style": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "complexity": "off",
+        "jsx-a11y/prefer-tag-over-role": "off",
+        "jsx-a11y/role-has-required-aria-props": "off",
+        "no-nested-ternary": "off",
+        "no-plusplus": "off",
+        "no-shadow": "off",
+        "no-use-before-define": "off",
+        "no-useless-return": "off",
+        "no-negated-condition": "off",
+        "prefer-destructuring": "off",
+        "promise/prefer-await-to-callbacks": "off",
+        "react-hooks/exhaustive-deps": "off",
+        "react/no-array-index-key": "off",
+        "react/no-clone-element": "off",
+        "unicorn/no-nested-ternary": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "array-callback-return": "off"
+      }
+    },
+    {
       "files": [
         "packages/backend/convex/healthCheck.ts",
         "packages/backend/convex/privateData.ts"
